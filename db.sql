@@ -66,3 +66,5 @@ CREATE TABLE cateItem (
 
 INSERT INTO cateItem SET regDate = NOW(), `name` = '자유 게시판';
 INSERT INTO cateItem SET regDate = NOW(), `name` = '공지 게시판';
+
+ALTER TABLE article ADD cateItemId TINYINT(1) NOT NULL AFTER displayStatus;
