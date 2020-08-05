@@ -25,5 +25,5 @@ public interface ArticleDao {
 
 	void increaseHit(int id);
 
-//	List<ArticleReply> getArticleReplyByArticleId(int id);
+	List<ArticleReply> getArticleReplyByArticleId(int id);
 }

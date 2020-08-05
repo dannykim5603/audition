@@ -31,9 +31,9 @@ public class ArticleController {
 	public String detail(Model model,int id) {
 		articleService.increaseHit(id);
 		Article article = articleService.detail(id);
-//		List<ArticleReply> articleReplies = articleService.getArticleReplyByArticleId(id);
+		List<ArticleReply> articleReplies = articleService.getArticleReplyByArticleId(id);
 		model.addAttribute("article",article);
-//		model.addAttribute("articleReply",articleReplies);
+		model.addAttribute("articleReply",articleReplies);
 		return "article/detail";
 	}
 	
@@ -61,11 +61,9 @@ public class ArticleController {
 		String title = (String)param.get("title");
 		Article article = articleService.detail(id);
 		String titleOri = article.getTitle();
-				
 		if (title.trim() == "") {
 			param.put("title", titleOri);
 		}
-		
 		articleService.modify(param);
 		return "redirect:/article/list";
 	}

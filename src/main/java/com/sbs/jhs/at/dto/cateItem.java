@@ -10,11 +10,6 @@ import lombok.NoArgsConstructor;
 public class cateItem {
 	private int id;
 	private String regDate;
-	private String updateDate;
-	private boolean delStatus;
-	private String delDate;
-	private boolean displayStatus;
-	private String title;
-	private String body;
-	private int hit;
+	private String name;
+
 }
