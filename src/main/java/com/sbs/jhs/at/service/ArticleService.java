@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbs.jhs.at.dao.ArticleDao;
 import com.sbs.jhs.at.dto.Article;
+import com.sbs.jhs.at.dto.ArticleReply;
 
 @Service
 public class ArticleService {
@@ -38,6 +39,14 @@ public class ArticleService {
 	public void delete(long id) {
 		articleDao.delete(id);
 	}
+
+	public void increaseHit(int id) {
+		articleDao.increaseHit(id);
+	}
+
+//	public List<ArticleReply> getArticleReplyByArticleId(int id) {
+//		return articleDao.getArticleReplyByArticleId(id);
+//	}
 }
 
 

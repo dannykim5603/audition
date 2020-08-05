@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Article {
+public class cateItem {
 	private int id;
 	private String regDate;
 	private String updateDate;

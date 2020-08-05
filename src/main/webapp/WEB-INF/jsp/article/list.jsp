@@ -2,13 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시물 리스트</title>
-</head>
-<body>
+<c:set var="pageName" value="게시물 리스트" />
+<%@ include file="../part/head.jspf"%>
+
+
+
+
 <style>
 body {
 	text-align:center;
@@ -39,6 +38,7 @@ body {
 				<th>id</th>
 				<th>regDate</th>
 				<th>title</th>
+				<th>hit</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +47,7 @@ body {
 				<td>${article.id}</td>
 				<td>${article.regDate}</td>
 				<td><a style="color: black; text-decoration: none" href="./detail?id=${article.id}">${article.title}</a></td>
+				<td>${article.hit}</td>
 			</tr>
 			</c:forEach>
 		</tbody>
@@ -55,5 +56,8 @@ body {
 		<div class="btns">
 			<a href="./list">list</a> <a href="./write">write</a>
 		</div>
-</body>
-</html>
+		
+		
+		
+		
+<%@ include file="../part/foot.jspf"%>

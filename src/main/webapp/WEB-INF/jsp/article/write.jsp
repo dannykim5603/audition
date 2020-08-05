@@ -2,13 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시물 작성</title>
-</head>
-<body>
+<c:set var="pageName" value="게시물 작성" />
+<%@ include file="../part/head.jspf"%>
+<style>
+body {
+	text-align:center;
+}
+</style>
 	<form action="doWrite" method="POST">
 		<h1>게시물 작성</h1>
 
@@ -23,6 +23,7 @@
 				<option value="0">비공개</option>
 			</select>
 		</div>
+		
 		<div>
 			<span>내용</span>
 			<textarea rows="10" cols="20" name="body" placeholder="내용"></textarea>
@@ -44,5 +45,6 @@
 			form.submit();
 		}
 	</script>
-</body>
-</html>
+	
+	
+<%@ include file="../part/foot.jspf"%>

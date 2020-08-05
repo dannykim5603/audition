@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sbs.jhs.at.dto.Article;
+import com.sbs.jhs.at.dto.ArticleReply;
 import com.sbs.jhs.at.service.ArticleService;
 
 @Controller
@@ -27,9 +28,12 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("/article/detail")
-	public String detail(Model model,long id) {
+	public String detail(Model model,int id) {
+		articleService.increaseHit(id);
 		Article article = articleService.detail(id);
+//		List<ArticleReply> articleReplies = articleService.getArticleReplyByArticleId(id);
 		model.addAttribute("article",article);
+//		model.addAttribute("articleReply",articleReplies);
 		return "article/detail";
 	}
 	
@@ -53,6 +57,15 @@ public class ArticleController {
 	
 	@RequestMapping("/article/doModify")
 	public String doModify(Model model,@RequestParam Map<String,Object> param) {
+		int id = Integer.parseInt((String)param.get("id"));
+		String title = (String)param.get("title");
+		Article article = articleService.detail(id);
+		String titleOri = article.getTitle();
+				
+		if (title.trim() == "") {
+			param.put("title", titleOri);
+		}
+		
 		articleService.modify(param);
 		return "redirect:/article/list";
 	}
@@ -60,6 +73,12 @@ public class ArticleController {
 	@RequestMapping("/article/delete")
 	public String delete(long id) {
 		articleService.delete(id);
+		return "redirect:/article/list";
+	}
+	
+	@RequestMapping("/article/writeReply")
+	public String writeReply(Model model,@RequestParam Map<String,Object> param) {
+		
 		return "redirect:/article/list";
 	}
 	

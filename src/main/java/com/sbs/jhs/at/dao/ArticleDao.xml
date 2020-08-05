@@ -33,10 +33,9 @@
 	
 	<update id="modify" parameterType="map">
 		UPDATE article
-		<set>
-		<if test="title != null">title= #{title},</if>
-		<if test="body != null">body = #{body}</if>
-		</set>
+		SET updateDate = NOW(),
+		title = #{title},
+		body = #{body}		
 		WHERE id = #{id}
 	</update>
 	
@@ -47,4 +46,16 @@
 		delDate = NOW()
 		WHERE id = #{id}
 	</update>
+	
+	<update id="increaseHit">
+		UPDATE article
+		SET hit = hit + 1
+		WHERE id = #{id}
+	</update>
+<!-- 	
+	<select id="getArticleReplyByArticleId" resultType="ArticleReply">
+		SELECT * FROM articleReply
+		WHERE id = #{id}
+	</select>
+	 -->
 </mapper>

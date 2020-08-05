@@ -2,14 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시물 수정</title>
-</head>
-<body>
-	<form action="./doModfiy" method="POST">
+<c:set var="pageName" value="게시물 수정" />
+<%@ include file="../part/head.jspf"%>
+<style>
+form {
+	text-align:center;
+}
+.btns {
+	text-align:center;
+}
+</style>
+
+	<form action="doModify" method="POST" onsubmit="submitModifyForm(this); return false;">
 		<input type="hidden" name="id" value="${article.id}" />
 		<h1>게시물 수정</h1>
 
@@ -33,11 +37,12 @@
 		</div>
 		<div>
 			<input type="submit" class="submit-btn" value="modify" />
+			
 			<button type="button" class="cancel" value="cancel" onclick="location.href='./detail?id=${article.id}'">cancel</button>
 		</div>
 	</form>
 	<div class="btns">
 		<a href="./list">list</a> <a href="./delete?id=${article.id}">delete</a>
 	</div>
-</body>
-</html>
+	
+<%@ include file="../part/foot.jspf"%>
