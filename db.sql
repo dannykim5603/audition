@@ -54,6 +54,8 @@ CREATE TABLE articleReply(
 
 SELECT * FROM articleReply;
 
+ALTER TABLE articleReply ADD articleId TINYINT(1) NOT NULL AFTER id;
+
 INSERT articleReply 
 
 CREATE TABLE cateItem (
