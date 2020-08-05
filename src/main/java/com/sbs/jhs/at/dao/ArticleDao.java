@@ -12,7 +12,7 @@ import com.sbs.jhs.at.dto.ArticleReply;
 public interface ArticleDao {
 	
 	List<Article> getList();
-
+	
 	Article detail(long id);
 
 	int getTotalCount();

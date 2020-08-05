@@ -12,12 +12,21 @@ body {
 
 .body {
 	border: 3px black double;
+	height:500px;
+	margin-left: 20px;
+    margin-right: 20px
 }
 .reply-list-box{
 	text-align: -webkit-center;
 	border: 3px black double;
     border-top: none;
+    margin-left: 20px;
+    margin-right: 20pxa
 }
+.reply-body {
+	text-align:center;
+}
+
 </style>
 <h1>게시물 상세</h1>
 
@@ -28,6 +37,13 @@ body {
 <div class="body">내용 : ${article.body}</div>
 <div class="reply-list-box">
 	<table>
+	<colgroup>
+		<col width="10%"/>
+		<col width="25%"/>
+		<col width="15%"/>
+		<col />
+		<col width="10%"/>
+	</colgroup>
 		<c:forEach items="${articleReply}" var="articleReply">
 		<thead>	
 			<tr>
@@ -38,7 +54,7 @@ body {
 				<th>비고</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class= "reply-body">
 			<tr>
 				<td>${articleReply.id}</td>
 				<td>${articleReply.regDate}</td>
@@ -52,8 +68,7 @@ body {
 </div>
 <div class="reply-write-box"></div>
 <div class="direction">
-	<a href="./detail?id=${article.id-1}">BEFORE</a> <a
-		href="./detail?id=${article.id+1}">NEXT</a>
+	<a href="./detail?id=${article.id-1}">BEFORE</a> <a	href="./detail?id=${article.id+1}">NEXT</a>
 </div>
 <div class="btns">
 	<a href="./list">list</a> <a href="./modify?id=${article.id}">modify</a>
