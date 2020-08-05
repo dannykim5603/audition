@@ -9,7 +9,7 @@
 <title>게시물 수정</title>
 </head>
 <body>
-	<form action="doModfiy" method="POST">
+	<form action="./doModfiy" method="POST">
 		<input type="hidden" name="id" value="${article.id}" />
 		<h1>게시물 수정</h1>
 

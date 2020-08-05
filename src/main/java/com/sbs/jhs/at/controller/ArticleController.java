@@ -23,7 +23,6 @@ public class ArticleController {
 		int totalCount = articleService.getTotalCount();
 		model.addAttribute("list", list);
 		model.addAttribute("totalCount", totalCount);
-
 		return "article/list";
 	}
 	
@@ -46,14 +45,14 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("/article/modify")
-	public String modify(Model model,long id) {
+	public String modify(Model model,int id) {
 		Article article = articleService.detail(id);
 		model.addAttribute("article",article);
 		return "article/modify";
 	}
 	
 	@RequestMapping("/article/doModify")
-	public String doModify(@RequestParam Map<String,Object> param) {
+	public String doModify(Model model,@RequestParam Map<String,Object> param) {
 		articleService.modify(param);
 		return "redirect:/article/list";
 	}
@@ -61,7 +60,6 @@ public class ArticleController {
 	@RequestMapping("/article/delete")
 	public String delete(long id) {
 		articleService.delete(id);
-		
 		return "redirect:/article/list";
 	}
 	
