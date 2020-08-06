@@ -18,6 +18,7 @@ public class Article {
 	private boolean delStatus;
 	private String delDate;
 	private boolean displayStatus;
+	private int cateItemId;
 	private String title;
 	private String body;
 	private int hit;

@@ -9,8 +9,10 @@
 	
 	
 	<h1>메인입니다.</h1>
-	
-	
+
+<a href="/member/join">join</a>	
+<a href="/member/login">login</a>
+
 	
 	
 <%@ include file="../part/foot.jspf"%>

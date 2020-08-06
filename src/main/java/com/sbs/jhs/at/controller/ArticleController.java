@@ -32,6 +32,8 @@ public class ArticleController {
 		articleService.increaseHit(id);
 		Article article = articleService.detail(id);
 		List<ArticleReply> articleReplies = articleService.getArticleReplyByArticleId(id);
+		int totalCount = articleService.getTotalCount();
+		model.addAttribute("totlaCount",totalCount);
 		model.addAttribute("article",article);
 		model.addAttribute("articleReply",articleReplies);
 		return "article/detail";
@@ -79,5 +81,6 @@ public class ArticleController {
 		
 		return "redirect:/article/list";
 	}
+	
 	
 }

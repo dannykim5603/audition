@@ -36,8 +36,7 @@ title = '제목3',
 `body` = '내용3',
 displayStatus = 1;
 
-SELECT *
-FROM article;
+SELECT * FROM article;
 
 ALTER TABLE article ADD hit TINYINT(1) NOT NULL DEFAULT 0 AFTER BODY;
  
@@ -54,9 +53,9 @@ CREATE TABLE articleReply(
 
 SELECT * FROM articleReply;
 
-ALTER TABLE articleReply ADD articleId TINYINT(1) NOT NULL AFTER id;
+SELECT * FROM cateItem;
 
-INSERT articleReply 
+ALTER TABLE articleReply ADD articleId TINYINT(1) NOT NULL AFTER id;
 
 CREATE TABLE cateItem (
 	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -68,3 +67,15 @@ INSERT INTO cateItem SET regDate = NOW(), `name` = '자유 게시판';
 INSERT INTO cateItem SET regDate = NOW(), `name` = '공지 게시판';
 
 ALTER TABLE article ADD cateItemId TINYINT(1) NOT NULL AFTER displayStatus;
+
+
+CREATE TABLE MEMBER (
+	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	loginId CHAR(100) NOT NULL UNIQUE,
+	email CHAR(200) NOT NULL,
+	`name` CHAR(100) NOT NULL,
+	nickname CHAR(100) NOT NULL,
+	loginPw CHAR(200) NOT NULL
+);
+SELECT * FROM MEMBER;
