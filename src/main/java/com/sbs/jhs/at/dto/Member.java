@@ -14,9 +14,14 @@ import lombok.Setter;
 public class Member {
 	private int id;
 	private String regDate;
+	private String updateDate;
+	private boolean delStatus;
+	private String delDate;
+	private boolean authStatus;
 	private String loginId;
-	private String email;
+	private String loginPw;
 	private String name;
 	private String nickname;
-	private String loginPw;
+	private String email;
+	private String phoneNo;
 }

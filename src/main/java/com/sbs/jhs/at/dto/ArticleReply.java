@@ -1,5 +1,7 @@
 package com.sbs.jhs.at.dto;
 
+import java.util.Map;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ public class ArticleReply {
 	private boolean delStatus;
 	private String delDate;
 	private boolean displayStatus;
-	private String writer;
+	private int memberId;
 	private String body;
+	private Map<String,Object> extra;
 }

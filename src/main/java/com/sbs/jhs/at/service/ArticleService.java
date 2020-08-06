@@ -47,6 +47,18 @@ public class ArticleService {
 	public List<ArticleReply> getArticleReplyByArticleId(int id) {
 		return articleDao.getArticleReplyByArticleId(id);
 	}
+
+	public List<ArticleReply> getForPrintArticleReplies(Map<String, Object> param) {
+		return articleDao.getForPrintArticleReplies(param);
+	}
+
+	public int writeReply(Map<String, Object> param) {
+		return articleDao.writeReply(param);
+	}
+
+	public void deleteReply(int id) {
+		articleDao.deleteReply(id);
+	}
 }
 
 

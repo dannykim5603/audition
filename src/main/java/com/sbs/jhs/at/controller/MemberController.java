@@ -14,21 +14,21 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("/member/join")
+	@RequestMapping("/usr/member/join")
 	public String join() {
 		return "member/join";
 	}
 
-	@RequestMapping("/member/doJoin")
+	@RequestMapping("/usr/member/doJoin")
 	public String doJoin(@RequestParam Map<String,Object> param) {
 		memberService.join(param);
 		return "redirect:/home/main";
 	}
-	@RequestMapping("/member/login")
+	@RequestMapping("/usr/member/login")
 	public String login() {
 		return "member/login";
 	}
-	@RequestMapping("/member/doLogin")
+	@RequestMapping("/usr/member/doLogin")
 	public String doLogin(@RequestParam Map<String,Object> param) {
 		int loginedMemberId = memberService.login(param).getId();
 		

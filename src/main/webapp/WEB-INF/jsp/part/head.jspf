@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비디오디션 - ${pageTitle}</title>
+<title>${logoText} - ${pageTitle}</title>
 
 <!-- 구글 폰트 불러오기 -->
 <!-- rotobo(400/700/900), notosanskr(400/600/900) -->
@@ -27,4 +27,5 @@
 </head>
 <body>
 	<div class="outer-box">
+	<a href="/usr/home/main">home</a>
 		<h1 class="page-title-box con">${pageTitle}</h1>

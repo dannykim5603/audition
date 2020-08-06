@@ -21,8 +21,9 @@ public class MemberService {
 	public Member login(Map<String, Object> param) {
 		return memberDao.login(param);
 	}
+
+	public Member getMemberById(int id) {
+		return memberDao.getMemberById(id);
+	}
 	
-		
-
-
 }

@@ -10,8 +10,9 @@
 	
 	<h1>메인입니다.</h1>
 
-<a href="/member/join">join</a>	
-<a href="/member/login">login</a>
+<a href="/usr/member/join">join</a>	
+<a href="/usr/member/login">login</a>
+<a href="/usr/article/list">list</a>
 
 	
 	

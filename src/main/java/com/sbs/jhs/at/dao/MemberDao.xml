@@ -17,4 +17,12 @@
 		WHERE loginId = #{loginId}
 		AND loginPw = #{loginPw}
 	</select>
+	
+	<select id="getMemberById" resultType="Member">
+		SELECT *
+		FROM
+		article
+		WHERE
+		id = #{id}
+	</select>
 </mapper>
