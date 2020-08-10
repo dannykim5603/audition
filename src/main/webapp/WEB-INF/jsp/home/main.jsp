@@ -9,11 +9,20 @@
 	
 	
 	<h1>메인입니다.</h1>
-
+<div class = "util-box">
 <a href="/usr/member/join">join</a>	
 <a href="/usr/member/login">login</a>
 <a href="/usr/article/list">list</a>
-
+</div>
+<style>
+	.util-box {
+		
+	}
 	
+	.util-box > a {
+		text-decoration : none;
+		margin : 10px;
+	}
+</style>
 	
 <%@ include file="../part/foot.jspf"%>

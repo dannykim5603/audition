@@ -26,6 +26,12 @@
 
 </head>
 <body>
-	<div class="outer-box">
-	<a href="/usr/home/main">home</a>
+<style>
+body a {
+	text-decoration : none;
+	margin : 10px;
+}
+</style>
+	<div class="outer-box" style="text-align:center">
+	<a href="/usr/home/main" style = "text-decoration: none;">home</a>
 		<h1 class="page-title-box con">${pageTitle}</h1>
