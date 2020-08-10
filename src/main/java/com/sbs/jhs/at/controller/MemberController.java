@@ -22,7 +22,7 @@ public class MemberController {
 	@RequestMapping("/usr/member/doJoin")
 	public String doJoin(@RequestParam Map<String,Object> param) {
 		memberService.join(param);
-		return "redirect:/home/main";
+		return "redirect:/usr/home/main";
 	}
 	@RequestMapping("/usr/member/login")
 	public String login() {
@@ -30,12 +30,12 @@ public class MemberController {
 	}
 	@RequestMapping("/usr/member/doLogin")
 	public String doLogin(@RequestParam Map<String,Object> param) {
-		int loginedMemberId = memberService.login(param).getId();
+		int loginedMemberId = memberService.login(param);
 		
 		if (loginedMemberId == -1) {
 			return "html:<script> alert('아이디 혹은 비밀번호를 확인해 주세요'); location.replace('../home/main') </script>";
 		}
 
-		return "redirect:/home/main";
+		return "redirect:/usr/home/main";
 	}
 }

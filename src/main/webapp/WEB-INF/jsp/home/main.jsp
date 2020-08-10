@@ -8,15 +8,18 @@
 	
 	
 	
-	<h1>메인입니다.</h1>
+	<h1>메인</h1>
+	<br>
 <div class = "util-box">
+<a href="/usr/article/list">list</a>
 <a href="/usr/member/join">join</a>	
 <a href="/usr/member/login">login</a>
-<a href="/usr/article/list">list</a>
 </div>
+
 <style>
 	.util-box {
-		
+		display:flex;
+		justify-content:center;
 	}
 	
 	.util-box > a {

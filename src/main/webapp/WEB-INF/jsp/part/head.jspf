@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${logoText} - ${pageTitle}</title>
+<title>${logoText}-${pageName}</title>
 
 <!-- 구글 폰트 불러오기 -->
 <!-- rotobo(400/700/900), notosanskr(400/600/900) -->
@@ -24,14 +25,25 @@
 <!-- 공통 JS -->
 <script src="/resource/common.js"></script>
 
-</head>
-<body>
+<script>
+var param = ${paramJson};
+</script>
+
 <style>
 body a {
-	text-decoration : none;
-	margin : 10px;
+	text-decoration: none;
+	margin: 10px;
+}
+
+.util-box {
+	margin-top:20px;
 }
 </style>
-	<div class="outer-box" style="text-align:center">
-	<a href="/usr/home/main" style = "text-decoration: none;">home</a>
+</head>
+<body>
+	<div class="outer-box" style="text-align: center;" >
+		<div class="util-box">
+		<a href="/usr/home/main" style="text-decoration: none;">home</a>
+		<a href="./list">list</a>
+		</div>
 		<h1 class="page-title-box con">${pageTitle}</h1>

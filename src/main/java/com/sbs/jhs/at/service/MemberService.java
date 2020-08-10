@@ -18,8 +18,9 @@ public class MemberService {
 		return memberDao.join(param);
 	}
 
-	public Member login(Map<String, Object> param) {
-		return memberDao.login(param);
+	public int login(Map<String, Object> param) {
+		int loginedMemberId = memberDao.login(param);
+		return loginedMemberId;
 	}
 
 	public Member getMemberById(int id) {

@@ -9,6 +9,7 @@
 		email = #{email},
 		name = #{name},
 		nickname = #{nickname},
+		phoneNo = #{phoneNo},
 		loginPw = #{loginPwReal}
 	</insert>
 

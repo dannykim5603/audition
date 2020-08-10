@@ -92,6 +92,12 @@
 			form.nickname.focus();
 			return;
 		}
+		form.phoneNo.value = form.nickname.value.trim();
+		if (form.nickname.value.length == 0) {
+			alert('전화번호를 입력해주세요.');
+			form.nickname.focus();
+			return;
+		}
 		
 		form.email.value = form.email.value.trim();
 
@@ -135,6 +141,12 @@
 			<div class="label">NICKNAME</div>
 			<div class="input">
 				<input name="nickname" type="text" placeholder=" NICKNAME " />
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="label">PHONE NO.</div>
+			<div class="input">
+				<input name="phoneNo" type="text" placeholder=" PHONE NO. " />
 			</div>
 		</div>
 		<div class="form-row">

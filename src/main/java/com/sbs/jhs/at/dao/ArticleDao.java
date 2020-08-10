@@ -17,7 +17,7 @@ public interface ArticleDao {
 
 	int getTotalCount();
 
-	long write(Map<String, Object> param);
+	void write(Map<String, Object> param);
 
 	int modify(Map<String, Object> param);
 
@@ -29,7 +29,11 @@ public interface ArticleDao {
 
 	List<ArticleReply> getForPrintArticleReplies(Map<String, Object> param);
 
-	int writeReply(Map<String, Object> param);
+	void writeReply(Map<String, Object> param);
 
 	void deleteReply(int id);
+
+	ArticleReply getForPrintArticleReplyById(int id);
+
+	void modifyReply(Map<String, Object> param);
 }

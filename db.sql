@@ -39,16 +39,18 @@ displayStatus = 1;
 SELECT * FROM article;
 
 ALTER TABLE article ADD hit TINYINT(1) NOT NULL DEFAULT 0 AFTER BODY;
- 
-CREATE TABLE articleReply(
-	id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	regDate DATETIME NOT NULL,
-	updateDate DATETIME,
-	delDate DATETIME,
+
+# article 테이블 세팅
+CREATE TABLE articleReply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME,
+    updateDate DATETIME,
+    memberId INT(10) UNSIGNED NOT NULL,
+    articleId INT(10) UNSIGNED NOT NULL,
+    delDate DATETIME,
 	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-	displayStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
-	writer CHAR(100) NOT NULL,
-	`body` LONGTEXT NOT NULL
+	displayStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    `body` LONGTEXT NOT NULL
 );
 
 SELECT * FROM articleReply;
@@ -89,7 +91,6 @@ ALTER TABLE MEMBER ADD delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0;
 ALTER TABLE MEMBER ADD authStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0;
 ALTER TABLE MEMBER ADD phoneNo CHAR(20) NOT NULL DEFAULT 0;
 
-DROP TABLE MEMBER;
 
 # member 테이블 세팅
 CREATE TABLE `member` (
@@ -106,6 +107,8 @@ CREATE TABLE `member` (
     `email` CHAR(100) NOT NULL,
     `phoneNo` CHAR(20) NOT NULL
 );
+
+alter table `member` modify `phoneNo` default 000-0000-0000 not null;
 
 INSERT INTO `member`
 SET regDate = NOW(),

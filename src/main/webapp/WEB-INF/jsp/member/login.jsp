@@ -108,7 +108,7 @@
 			<div class="label"></div>
 			<div class="input last-box">
 				<input class="submit-box" style="width: 20%; border-radius: 15px;"
-					type="submit" value="로그인" /> <a class="cancel" href="home">취소</a>
+					type="submit" value="로그인" /> <a class="cancel" href="../usr/home/main">취소</a>
 			</div>
 		</div>
 	</form>

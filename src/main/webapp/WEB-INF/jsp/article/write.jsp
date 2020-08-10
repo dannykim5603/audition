@@ -23,7 +23,7 @@ body {
 				<option value="0">비공개</option>
 			</select>
 		</div>
-		
+			
 		<div>
 			<span>내용</span>
 			<textarea rows="10" cols="20" name="body" placeholder="내용"></textarea>

@@ -26,7 +26,7 @@ body {
 </style>
 <!-- 리스트 테이블 -->
 	<h1>게시물 리스트</h1>
-	<h2>전체 게시물 개수 <${totalCount}> </h2>
+	<h2>전체 게시물 개수 ${totalCount} </h2>
 	<table class="list-table con">
 		<colgroup>
 			<col width="25"/>
@@ -53,8 +53,8 @@ body {
 		</tbody>
 
 	</table>
-		<div class="btns">
-			<a href="./list">list</a> <a href="./write">write</a>
+		<div class="btns" style="margin-top: 20px;">
+		<a href="./write">write</a>
 		</div>
 		
 		

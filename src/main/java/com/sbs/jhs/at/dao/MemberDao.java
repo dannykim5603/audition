@@ -12,7 +12,7 @@ public interface MemberDao {
 
 	int join(Map<String, Object> param);
 
-	Member login(Map<String, Object> param);
+	int login(Map<String, Object> param);
 
 	Member getMemberById(@Param("id") int id);
 	
