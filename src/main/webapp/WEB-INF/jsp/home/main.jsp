@@ -11,7 +11,6 @@
 	<h1>메인</h1>
 	<br>
 <div class = "util-box">
-<a href="/usr/article/list">list</a>
 <a href="/usr/member/join">join</a>	
 <a href="/usr/member/login">login</a>
 </div>

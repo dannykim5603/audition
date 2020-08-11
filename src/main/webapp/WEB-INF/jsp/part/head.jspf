@@ -25,9 +25,9 @@
 <!-- 공통 JS -->
 <script src="/resource/common.js"></script>
 
-<script>
-var param = ${paramJson};
-</script>
+<%="<script>"%>
+	var param = ${paramJson};
+<%="</script>"%>
 
 <style>
 body a {
@@ -44,6 +44,6 @@ body a {
 	<div class="outer-box" style="text-align: center;" >
 		<div class="util-box">
 		<a href="/usr/home/main" style="text-decoration: none;">home</a>
-		<a href="./list">list</a>
+		<a href="../article/list">list</a>
 		</div>
 		<h1 class="page-title-box con">${pageTitle}</h1>
