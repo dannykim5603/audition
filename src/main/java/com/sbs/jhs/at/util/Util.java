@@ -8,8 +8,11 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.common.cache.LoadingCache;
 
 public class Util {
 	public static int getAsInt(Object object) {
@@ -53,6 +56,7 @@ public class Util {
 			return "img";
 		case "mp4":
 		case "avi":
+		case "mov":
 			return "video";
 		case "mp3":
 			return "audio";
@@ -73,6 +77,8 @@ public class Util {
 		case "png":
 			return ext;
 		case "mp4":
+			return ext;
+		case "mov":
 			return ext;
 		case "avi":
 			return ext;
@@ -139,6 +145,14 @@ public class Util {
 		}
 		
 		return null;
+	}
+	
+	public static <T extends Object> T getCacheData(LoadingCache cache, int key) {
+		try {
+			return (T)cache.get(key);
+		} catch (ExecutionException e) {
+			return null;
+		}
 	}
 
 }
