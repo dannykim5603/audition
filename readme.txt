@@ -1,7 +1,11 @@
-# my.cnf mysqld ¼³Á¤
-[mysqld]
-lower_case_table_names = 2 # Å×ÀÌºí ¸í¿¡ ¼Ò¹®ÀÚ Çã¿ë
-max_allowed_packet = 50M # # file Å×ÀÌºí¿¡ ½ÇÁ¦ ÆÄÀÏÀ» ÀúÀåÇÏ·Á¸é
+# í• ì¼ ë¦¬ìŠ¤íŠ¸
+## í• ì¼ ë¦¬ìŠ¤íŠ¸
 
-<À§Ä¡>
-xampp  > MySQL > config > my.ini > (ctrl + f) +  [mysqld] > À§¿§ ³»¿ë ºÙÇô³Ö±â
+[o] íšŒì›ê°€ì…
+[o] ë¡œê·¸ì¸
+[ ] ë¡œê·¸ì•„ì›ƒ
+
+## my.cnf mysqld ì„¤ì •
+[mysqld]
+lower_case_table_names = 2 # í…Œì´ë¸” ëª…ì— ì†Œë¬¸ì í—ˆìš©
+max_allowed_packet = 50M # # file í…Œì´ë¸”ì— ì‹¤ì œ íŒŒì¼ì„ ì €ì¥í•˜ë ¤ë©´
