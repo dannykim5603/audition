@@ -29,10 +29,7 @@
 					<th>첨부 파일 1</th>
 					<td>
 						<div class="video-box">
-							<video controls
-								src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['1'].id}">video
-								not supported
-							</video>
+							<video controls src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['1'].id}">video not supported</video>
 						</div>
 					</td>
 				</tr>
@@ -42,10 +39,7 @@
 					<th>첨부 파일 2</th>
 					<td>
 						<div class="video-box">
-							<video controls
-								src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['2'].id}">video
-								not supported
-							</video>
+							<video controls src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['2'].id}">video not supported</video>
 						</div>
 					</td>
 				</tr>
