@@ -3,6 +3,8 @@ package com.sbs.jhs.at.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,66 +12,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sbs.jhs.at.dto.Article;
+import com.sbs.jhs.at.dto.Member;
 import com.sbs.jhs.at.service.ArticleService;
 
 @Controller
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
-	
+
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model) {
-		List<Article> list = articleService.getList();
-		int totalCount = articleService.getTotalCount();
-		model.addAttribute("list", list);
-		model.addAttribute("totalCount", totalCount);
+		List<Article> articles = articleService.getForPrintArticles();
+
+		model.addAttribute("articles", articles);
+
 		return "article/list";
 	}
-	
+
 	@RequestMapping("/usr/article/detail")
-	public String detail(Model model,int id) {
-		articleService.increaseHit(id);
-		Article article = articleService.detail(id);
-		int totalCount = articleService.getTotalCount();
-		model.addAttribute("totlaCount",totalCount);
-		model.addAttribute("article",article);
+	public String showDetail(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req) {
+		int id = Integer.parseInt((String) param.get("id"));
+		
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
+
+		model.addAttribute("article", article);
+
 		return "article/detail";
 	}
-	
+
 	@RequestMapping("/usr/article/write")
-	public String write() {
+	public String showWrite() {
 		return "article/write";
 	}
-	
+
 	@RequestMapping("/usr/article/doWrite")
-	public String doWrite(@RequestParam Map<String,Object> param) {
-		articleService.write(param);
-		return "redirect:/usr/article/list";
-	}
-	
-	@RequestMapping("/usr/article/modify")
-	public String modify(Model model,int id) {
-		Article article = articleService.detail(id);
-		model.addAttribute("article",article);
-		return "article/modify";
-	}
-	
-	@RequestMapping("/usr/article/doModify")
-	public String doModify(Model model,@RequestParam Map<String,Object> param) {
-		int id = Integer.parseInt((String)param.get("id"));
-		String title = (String)param.get("title");
-		Article article = articleService.detail(id);
-		String titleOri = article.getTitle();
-		if (title.trim() == "") {
-			param.put("title", titleOri);
-		}
-		articleService.modify(param);
-		return "redirect:/usr/article/list";
-	}
-	
-	@RequestMapping("/usr/article/delete")
-	public String delete(long id) {
-		articleService.delete(id);
-		return "redirect:/usr/article/list";
+	public String doWrite(@RequestParam Map<String, Object> param, HttpServletRequest req) {
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		param.put("memberId", loginedMemberId);
+		int newArticleId = articleService.write(param);
+
+		String redirectUri = (String) param.get("redirectUri");
+		redirectUri = redirectUri.replace("#id", newArticleId + "");
+
+		return "redirect:" + redirectUri;
 	}
 }

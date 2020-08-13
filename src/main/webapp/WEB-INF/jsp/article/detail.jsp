@@ -2,128 +2,84 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageName" value="게시물 상세" />
+<c:set var="pageTitle" value="게시물 상세내용" />
 <%@ include file="../part/head.jspf"%>
 
-<style>
-body {
-	text-align: center;
-}
-
-.body {
-	border: 3px black double;
-	height: 500px;
-	margin-left: 18%;
-	margin-right: 18%;
-}
-
-.reply-list-box {
-	text-align: -webkit-center;
-	border-top: none;
-	margin-left: 20%;
-	margin-right: 20%;
-}
-
-.reply-list-box > table{
-}
-
-.reply-body {
-	text-align: center;
-}
-
-.reply-list-box>table>tbody>tr[data-modify-mode="N"] .modify-mode-visible
-	{
-	display: none;
-}
-
-.reply-list-box>table>tbody>tr[data-modify-mode="Y"] .modify-mode-invisible
-	{
-	display: none;
-}
-
-.reply-list-box>table>tbody>tr>.reply-body-td>.modify-mode-visible>form
-	{
-	width: 100%;
-	display: block;
-}
-
-.reply-list-box>table>tbody>tr>.reply-body-td>.modify-mode-visible>form>textarea
-	{
-	width: 100%;
-	height: 100px;
-	box-sizing: border-box;
-	display: block;
-}
-
-.reply-write>form {
-	display: block;
-	width: 100%;
-}
-
-.reply-write>form>table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-.reply-write>form>table th, .reply-write>form>table td {
-	border: 1px solid black;
-	padding: 10px;
-}
-
-.reply-write>form>table textarea {
-	width: 100%;
-	display: block;
-	box-sizing: border-box;
-	height: 100px;
-}
-
-.direction {
-	display: flex;
-	justify-content: space-between;
-}
-
-.table-box {
-	margin-left: 18%;
-	margin-right: 18%;
-	margin-bottom: 10px;
-}
-
-.table-box>table>tbody>tr>td>button {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-</style>
-<h1>게시물 상세</h1>
-
-<div>
-	번호 : ${article.id} <br> 날짜 : ${article.regDate} <br> 제목 :
-	${article.title} <br> 조회수 : ${article.hit}<br>
+<div class="table-box con">
+	<table>
+		<tbody>
+			<tr>
+				<th>번호</th>
+				<td>${article.id}</td>
+			</tr>
+			<tr>
+				<th>날짜</th>
+				<td>${article.regDate}</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>${article.title}</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>${article.body}</td>
+			</tr>
+			<c:if test="${article.extra.file__common__attachment['1'] != null}">
+				<tr>
+					<th>첨부 파일 1</th>
+					<td>
+						<div class="video-box">
+							<video controls
+								src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['1'].id}">video
+								not supported
+							</video>
+						</div>
+					</td>
+				</tr>
+			</c:if>
+			<c:if test="${article.extra.file__common__attachment['2'] != null}">
+				<tr>
+					<th>첨부 파일 2</th>
+					<td>
+						<div class="video-box">
+							<video controls
+								src="/usr/file/streamVideo?id=${article.extra.file__common__attachment['2'].id}">video
+								not supported
+							</video>
+						</div>
+					</td>
+				</tr>
+			</c:if>
+		</tbody>
+	</table>
 </div>
-<div class="body" style="margin-top: 20px;">내용 : ${article.body}</div>
 
+<div class="btn-box con margin-top-20">
+	<c:if test="${article.extra.actorCanModify}">
+		<a class="btn btn-info" href="modify?id=${article.id}">수정</a>
+	</c:if>
+	<c:if test="${article.extra.actorCanDelete}">
+		<a class="btn btn-info" href="doDelete?id=${article.id}"
+			onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
+	</c:if>
+</div>
 
-<!-- 댓글작성 -->
 <c:if test="${isLogined}">
 	<h2 class="con">댓글 작성</h2>
 
 	<script>
-	var ArticleWriteReplyForm__submitDone = false;
+		var ArticleWriteReplyForm__submitDone = false;
 		function ArticleWriteReplyForm__submit(form) {
 			if ( ArticleWriteReplyForm__submitDone ) {
 				alert('처리중입니다.');
 			}
-			
 			form.body.value = form.body.value.trim();
 			if (form.body.value.length == 0) {
 				alert('댓글을 입력해주세요.');
 				form.body.focus();
 				return;
 			}
-
 			ArticleWriteReplyForm__submitDone = true;
-
-			<!-- 파일등록 -->
 			var startUploadFiles = function(onSuccess) {
 				if ( form.file__reply__0__common__attachment__1.value.length == 0 && form.file__reply__0__common__attachment__2.value.length == 0 ) {
 					onSuccess();
@@ -134,7 +90,6 @@ body {
 				fileUploadFormData.delete("relTypeCode");
 				fileUploadFormData.delete("relId");
 				fileUploadFormData.delete("body");
-
 				$.ajax({
 					url : './../file/doUploadAjax',
 					data : fileUploadFormData,
@@ -145,7 +100,6 @@ body {
 					success : onSuccess
 				});
 			}
-			
 			var startWriteReply = function(fileIdsStr, onSuccess) {
 				$.ajax({
 					url : './../reply/doWriteReplyAjax',
@@ -160,13 +114,14 @@ body {
 					success : onSuccess
 				});
 			};
-			
 			startUploadFiles(function(data) {
+				
 				var idsStr = '';
 				if ( data && data.body && data.body.fileIdsStr ) {
 					idsStr = data.body.fileIdsStr;
 				}
 				startWriteReply(idsStr, function(data) {
+					
 					if ( data.msg ) {
 						alert(data.msg);
 					}
@@ -184,6 +139,7 @@ body {
 		onsubmit="ArticleWriteReplyForm__submit(this); return false;">
 		<input type="hidden" name="relTypeCode" value="article" /> <input
 			type="hidden" name="relId" value="${article.id}" />
+
 		<table>
 			<tbody>
 				<tr>
@@ -191,7 +147,7 @@ body {
 					<td>
 						<div class="form-control-box">
 							<textarea maxlength="300" name="body" placeholder="내용을 입력해주세요."
-								style="width: 100%; height: 50px;"></textarea>
+								class="height-300"></textarea>
 						</div>
 					</td>
 				</tr>
@@ -223,7 +179,8 @@ body {
 </c:if>
 
 
-<!--  댓글 리스트  -->
+<h2 class="con">댓글 리스트</h2>
+
 <div class="reply-list-box table-box con">
 	<table>
 		<colgroup>
@@ -255,21 +212,11 @@ body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, .8);
+	background-color: rgba(0, 0, 0, 0.4);
 	display: none;
 }
-
 .reply-modify-form-modal-actived .reply-modify-form-modal {
 	display: flex;
-}
-
-.reply-modify-form-modal>.form1 {
-	color: white;
-	margin-top: auto;
-	margin-bottom: auto;
-	margin-right: auto;
-	margin-left: auto;
-	margin-right: auto
 }
 </style>
 
@@ -281,16 +228,6 @@ body {
 			<div class="form-control-label">내용</div>
 			<div class="form-control-box">
 				<textarea name="body" placeholder="내용을 입력해주세요."></textarea>
-			</div>
-		</div>
-		<div>
-			<div class="form-control-box">
-				<input type="file" accept="video/*" capture name="file__reply__0__common__attachment__1">
-			</div>
-		</div>
-		<div>
-			<div class="form-control-box">
-				<input type="file" accept="video/*" capture name="file__reply__0__common__attachment__2">
 			</div>
 		</div>
 		<div class="form-row">
@@ -308,7 +245,6 @@ body {
 	var ReplyList__$tbody = ReplyList__$box.find('tbody');
 	var ReplyList__lastLodedId = 0;
 	var ReplyList__submitModifyFormDone = false;
-	
 	function ReplyList__submitModifyForm(form) {
 		if (ReplyList__submitModifyFormDone) {
 			alert('처리중입니다.');
@@ -336,7 +272,6 @@ body {
 			ReplyList__submitModifyFormDone = false;
 		}, 'json');
 	}
-	
 	function ReplyList__showModifyFormModal(el) {
 		$('html').addClass('reply-modify-form-modal-actived');
 		var $tr = $(el).closest('tr');
@@ -346,33 +281,30 @@ body {
 		form.id.value = id;
 		form.body.value = originBody;
 	}
-	
 	function ReplyList__hideModifyFormModal() {
 		$('html').removeClass('reply-modify-form-modal-actived');
 	}
-	
+	// 10초
+	ReplyList__loadMoreInterval = 10 * 1000;
 	function ReplyList__loadMoreCallback(data) {
 		if (data.body.replies && data.body.replies.length > 0) {
 			ReplyList__lastLodedId = data.body.replies[data.body.replies.length - 1].id;
 			ReplyList__drawReplies(data.body.replies);
 		}
-		setTimeout(ReplyList__loadMore, 2000);
+		setTimeout(ReplyList__loadMore, ReplyList__loadMoreInterval);
 	}
-	
 	function ReplyList__loadMore() {
 		$.get('../reply/getForPrintReplies', {
 			articleId : param.id,
 			from : ReplyList__lastLodedId + 1
 		}, ReplyList__loadMoreCallback, 'json');
 	}
-	
 	function ReplyList__drawReplies(replies) {
 		for (var i = 0; i < replies.length; i++) {
 			var reply = replies[i];
 			ReplyList__drawReply(reply);
 		}
 	}
-	
 	function ReplyList__delete(el) {
 		if (confirm('삭제 하시겠습니까?') == false) {
 			return;
@@ -385,7 +317,6 @@ body {
 			$tr.remove();
 		}, 'json');
 	}
-	
 	function ReplyList__drawReply(reply) {
 		var html = '';
 		html += '<tr data-id="' + reply.id + '">';
@@ -394,54 +325,31 @@ body {
 		html += '<td>' + reply.extra.writer + '</td>';
 		html += '<td>';
 		html += '<div class="reply-body">' + reply.body + '</div>';
-		
 		if ( reply.extra.file__common__attachment ) {
-				for ( var no in reply.extra.file__common__attachment ) {
-					var file = reply.extra.file__common__attachment[no];
-		            html += '<div class="video-box"><video controls src="/usr/file/streamVideo?id=' + file.id + '">video not supported</video></div>';				
-				}
-			
-			html += '</td>';
-			html += '<td>';
-	
-			if (reply.extra.actorCanDelete) {
-				html += '<button type="button" onclick="ReplyList__delete(this);">삭제</button>';
+			for ( var no in reply.extra.file__common__attachment ) {
+				var file = reply.extra.file__common__attachment[no];
+	            html += '<div class="video-box"><video controls src="/usr/file/streamVideo?id=' + file.id + '">video not supported</video></div>';				
 			}
-			
-			if (reply.extra.actorCanModify) {
-				html += '<button type="button" onclick="ReplyList__showModifyFormModal(this);">수정</button>';
-			}
-			
-			html += '</td>';
-			html += '</tr>';
-			
-			var $tr = $(html);
-			$tr.data('data-originBody', reply.body);
-			ReplyList__$tbody.prepend($tr);
+            
+        }
+		
+		html += '</td>';
+		html += '<td>';
+		if (reply.extra.actorCanDelete) {
+			html += '<button type="button" onclick="ReplyList__delete(this);">삭제</button>';
 		}
+		
+		if (reply.extra.actorCanModify) {
+			html += '<button type="button" onclick="ReplyList__showModifyFormModal(this);">수정</button>';
+		}
+		
+		html += '</td>';
+		html += '</tr>';
+		var $tr = $(html);
+		$tr.data('data-originBody', reply.body);
+		ReplyList__$tbody.prepend($tr);
 	}
-	
 	ReplyList__loadMore();
-	
 </script>
-
-<div class="btns" style="margin-bottom: 20px;">
-	<a href="./modify?id=${article.id}">modify</a> <a
-		href="./delete?id=${article.id}">delete</a>
-</div>
-
-<style>
-.direction>a {
-	border: 3px solid black;
-	padding: 5px;
-}
-</style>
-
-<div class="direction" style="margin-right: 20px; margin-left: 20px;">
-	<c:if test="${article.delStatus == 'false' && article.id > 0}">
-		<a href="./detail?id=${article.id-1}">BEFORE</a>
-		<a href="./detail?id=${article.id+1}">NEXT</a>
-	</c:if>
-</div>
 
 <%@ include file="../part/foot.jspf"%>

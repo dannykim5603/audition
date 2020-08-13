@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sbs.jhs.at.dao.MemberDao">
-	
-	<insert id="join" parameterType="map" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO member
-		SET regDate = NOW(),
-		loginId = #{loginId},
-		email = #{email},
-		name = #{name},
-		nickname = #{nickname},
-		phoneNo = #{phoneNo},
-		loginPw = #{loginPwReal}
-	</insert>
-
-	<select id="login" resultType="int">
-		SELECT * FROM member
-		WHERE loginId = #{loginId}
-		AND loginPw = #{loginPw}
-	</select>
-	
 	<select id="getMemberById" resultType="Member">
 		SELECT *
-		FROM
-		article
+		FROM member
 		WHERE
 		id = #{id}
+	</select>
+
+	<select id="getLoginIdDupCount" resultType="int">
+		SELECT COUNT(*) AS
+		cnt
+		FROM member
+		WHERE loginId = #{loginId}
+	</select>
+
+	<insert id="join" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO member
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		authStatus = 0,
+		loginId = #{loginId},
+		loginPw = #{loginPw},
+		`name` = #{name},
+		nickname =
+		#{nickname},
+		email = #{email},
+		cellphoneNo = #{cellphoneNo}
+	</insert>
+	
+	<select id="getMemberByLoginId" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE loginId = #{loginId}
 	</select>
 </mapper>

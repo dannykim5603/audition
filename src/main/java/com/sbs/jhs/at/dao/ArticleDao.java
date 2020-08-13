@@ -4,23 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.sbs.jhs.at.dto.Article;
+import com.sbs.jhs.at.dto.Reply;
 
 @Mapper
 public interface ArticleDao {
-	
-	List<Article> getList();
-	
-	Article detail(long id);
+	List<Article> getForPrintArticles();
 
-	int getTotalCount();
+	Article getForPrintArticleById(@Param("id") int id);
 
 	void write(Map<String, Object> param);
-
-	int modify(Map<String, Object> param);
-
-	void delete(long id);
-
-	void increaseHit(int id);
 }

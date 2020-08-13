@@ -27,16 +27,6 @@
 		    <artifactId>guava</artifactId>
 		    <version>29.0-jre</version>
 		</dependency>
-		<!--  댓글 동영상 업로드  -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 		<!-- SQL 로거 -->
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
@@ -103,7 +93,18 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
+		<!-- 메일 보내기 위한 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<!-- 메일 보내기 위한 -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

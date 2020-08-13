@@ -18,12 +18,15 @@ public interface FileDao {
 	List<File> getFilesRelTypeCodeAndRelIdsAndTypeCodeAndType2CodeAndFileNo(@Param("relTypeCode") String relTypeCode,
 			@Param("relIds") List<Integer> relIds, @Param("typeCode") String typeCode,
 			@Param("type2Code") String type2Code, @Param("fileNo") int fileNo);
-	
+
 	File getFileById(@Param("id") int id);
 
 	void deleteFiles(@Param("relTypeCode") String relTypeCode, @Param("relId") int relId);
-	
+
 	List<File> getFilesRelTypeCodeAndRelIdsAndTypeCodeAndType2Code(@Param("relTypeCode") String relTypeCode,
 			@Param("relIds") List<Integer> relIds, @Param("typeCode") String typeCode,
 			@Param("type2Code") String type2Code);
+
+	List<File> getFilesRelTypeCodeAndRelIdAndTypeCodeAndType2Code(String relTypeCode, int relId, String typeCode,
+			String type2Code);
 }

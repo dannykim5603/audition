@@ -29,8 +29,6 @@ import com.sbs.jhs.at.service.FileService;
 import com.sbs.jhs.at.service.VideoStreamService;
 import com.sbs.jhs.at.util.Util;
 
-import reactor.core.publisher.Mono;
-
 @Controller
 public class FileController {
 	@Autowired
@@ -38,7 +36,7 @@ public class FileController {
 	@Autowired
 	private VideoStreamService videoStreamService;
 
-	private LoadingCache<Integer, File> fileCache = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(2, TimeUnit.MINUTES).build(new CacheLoader<Integer, File>() {
+	private LoadingCache<Integer, File> fileCache = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(10, TimeUnit.MINUTES).build(new CacheLoader<Integer, File>() {
 		@Override
 		public File load(Integer fileId) {		
 			return fileService.getFileById(fileId);
@@ -46,12 +44,12 @@ public class FileController {
 	});
 	
 	@RequestMapping("/usr/file/streamVideo")
-	public Mono<ResponseEntity<byte[]>> streamVideo(
-			@RequestHeader(value = "Range", required = false) String httpRangeList, int id) {
-		File file = fileService.getFileById(id);
-		final ByteArrayInputStream is = new ByteArrayInputStream(file.getBody());
+	public ResponseEntity<byte[]> streamVideo(@RequestHeader(value = "Range", required = false) String httpRangeList,
+			int id) {
+		File file = Util.getCacheData(fileCache, id);
 
-		return Mono.just(videoStreamService.prepareContent(is, file.getFileSize(), file.getFileExt(), httpRangeList));
+		return videoStreamService.prepareContent(new ByteArrayInputStream(file.getBody()), file.getFileSize(),
+				file.getFileExt(), httpRangeList);
 	}
 	
 	@RequestMapping("/usr/file/doUploadAjax")

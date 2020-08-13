@@ -10,21 +10,5 @@
 	
 	<h1>메인</h1>
 	<br>
-<div class = "util-box">
-<a href="/usr/member/join">join</a>	
-<a href="/usr/member/login">login</a>
-</div>
-
-<style>
-	.util-box {
-		display:flex;
-		justify-content:center;
-	}
-	
-	.util-box > a {
-		text-decoration : none;
-		margin : 10px;
-	}
-</style>
-	
+		
 <%@ include file="../part/foot.jspf"%>

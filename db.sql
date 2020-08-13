@@ -159,3 +159,14 @@ ALTER TABLE `at`.`article` ADD COLUMN originFileName VARCHAR(100) NOT NULL AFTER
 ALTER TABLE article MODIFY relTypeCode CHAR(50) DEFAULT 0 NOT NULL;
 ALTER TABLE article MODIFY relId INT(10) DEFAULT 0 NOT NULL;
 ALTER TABLE article MODIFY originFileName VARCHAR(100) DEFAULT 0 NOT NULL;
+
+ALTER TABLE `member` CHANGE `phoneNo` `cellphoneNo` CHAR(20) NOT NULL; 
+
+# 게시물 테이블에 작성자 정보 추가
+ALTER TABLE `article` ADD COLUMN `memberId` INT(10) UNSIGNED NOT NULL AFTER `delStatus`; 
+
+UPDATE article
+SET memberId = 1
+WHERE memberId = 0;
+
+ALTER TABLE `article` MODIFY displayStatus TINYINT(1) UNSIGNED DEFAULT 1;
