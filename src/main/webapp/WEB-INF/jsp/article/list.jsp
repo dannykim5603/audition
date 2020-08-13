@@ -5,6 +5,12 @@
 <c:set var="pageTitle" value="게시물 리스트" />
 <%@ include file="../part/head.jspf"%>
 
+<style>
+.table-box {
+	margin-right:20%;
+	margin-left:20%;
+}
+</style>
 <div class="table-box con">
 	<table>
 		<colgroup>

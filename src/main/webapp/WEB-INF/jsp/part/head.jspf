@@ -50,7 +50,7 @@ body a {
 </style>
 </head>
 <body>
-	<div class="outer-box" style="text-align: center;" >
+	<div class="outer-box" style="text-align: center; margin-right:20px; margin-left:20px; margin-bottom : 50px;"  >
 		
 		<div class="top-bar con">
 			<c:if test="${isLogined}">
