@@ -170,3 +170,9 @@ SET memberId = 1
 WHERE memberId = 0;
 
 ALTER TABLE `article` MODIFY displayStatus TINYINT(1) UNSIGNED DEFAULT 1;
+
+# 파일 테이블에 유니크 인덱스 추가
+ALTER TABLE `file` ADD UNIQUE INDEX (`relId`, `relTypeCode`, `typeCode`, `type2Code`, `fileNo`); 
+
+# DB 사용자 생성
+GRANT ALL PRIVILEGES ON at.* TO `at`@`localhost` IDENTIFIED BY 'sbs123414';

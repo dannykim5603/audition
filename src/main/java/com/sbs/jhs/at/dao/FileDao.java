@@ -29,4 +29,11 @@ public interface FileDao {
 
 	List<File> getFilesRelTypeCodeAndRelIdAndTypeCodeAndType2Code(String relTypeCode, int relId, String typeCode,
 			String type2Code);
+	
+	void update(Map<String, Object> param);
+	
+	Integer getFileId(@Param("relTypeCode") String relTypeCode, @Param("relId") int relId,
+			@Param("typeCode") String typeCode, @Param("type2Code") String type2Code, @Param("fileNo") int fileNo);
+
+	void deleteFile(@Param("id") int id);
 }

@@ -39,6 +39,11 @@
 <%="</script>"%>
 
 <style>
+body {
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
 body a {
 	text-decoration: none;
 	margin: 10px;
@@ -47,30 +52,46 @@ body a {
 .util-box {
 	margin-top:20px;
 }
+
+.top-bar {
+	justify-content:center;
+}
+
+.outer-box > h1 {
+	text-align:center;
+	margin-bottom:20px;
+}
 </style>
 </head>
 <body>
-	<div class="outer-box" style="text-align: center; margin-right:20px; margin-left:20px; margin-bottom : 50px;"  >
-		
-		<div class="top-bar con">
-			<c:if test="${isLogined}">
-				${loginedMember.nickname}님 환영합니다.
-			</c:if>
-			<a href="/usr/home/main" class="btn btn-info">홈</a>
+	<div class="outer-box">
+		<div class="top-bar con flex flex-ai-c flex-jc-sb margin-top-30">
+			<a href="/usr/home/main" class="logo img-box"> <img
+				src="/resource/img/logo_1@3x.png" alt="" />
+			</a>
 
-			<a class="btn btn-info" href="/usr/article/list">오디션 게시판</a>
-			<a class="btn btn-info" href="/usr/article/write">오디션 생성</a>
+			<nav class="menu-box-1">
+				<ul class="flex">
+					<li class="padding-0-10"><a href="/usr/home/main"
+						class="btn btn-info">홈</a></li>
+					<li class="padding-0-10"><a class="btn btn-info"
+						href="/usr/article/list">오디션 게시판</a></li>
+					<li class="padding-0-10"><a class="btn btn-info"
+						href="/usr/article/write">오디션 생성</a></li>
+					<c:if test="${isLogined}">
+						<li class="padding-0-10"><a class="btn btn-info"
+							href="/usr/member/doLogout">로그아웃</a></li>
+					</c:if>
+					<c:if test="${isLogined == false}">
+						<li class="padding-0-10"><a class="btn btn-info"
+							href="/usr/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a></li>
 
-			<c:if test="${isLogined}">
-				<a class="btn btn-info" href="/usr/member/doLogout">로그아웃</a>
-			</c:if>
-			<c:if test="${isLogined == false}">
-				<a class="btn btn-info"
-					href="/usr/member/login?redirectUri=${encodedAfterLoginUri}">로그인</a>
-				<a class="btn btn-info" href="/usr/member/join">회원가입</a>
-			</c:if>
-		</div>
-	
-		<div class="util-box">
+						<li class="padding-0-10"><a class="btn btn-info"
+							href="/usr/member/join">회원가입</a></li>
+
+					</c:if>
+
+				</ul>
+			</nav>
 		</div>
 		<h1 class="page-title-box con">${pageTitle}</h1>
